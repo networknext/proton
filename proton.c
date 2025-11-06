@@ -3,7 +3,7 @@
 
     Licensed under the GNU General Public License 3.0
 
-    This module supports Ubuntu 24.04 LTS
+    Tested on Ubuntu 22.04 LTS and Ubuntu 24.04 LTS
 
     USAGE:
 
@@ -102,7 +102,7 @@ static const struct btf_kfunc_id_set bpf_task_kfunc_set = {
 
 static int __init proton_init( void ) 
 {
-    pr_info( "Proton kernel module initializing...\n" );
+    pr_info( "proton kernel module initializing...\n" );
 
     sha256 = crypto_alloc_shash( "sha256", 0, 0 );
     if ( IS_ERR( sha256 ) )
@@ -118,21 +118,21 @@ static int __init proton_init( void )
         return -1;
     }
 
-    pr_info( "Network Next kernel module initialized successfully\n" );
+    pr_info( "proton kernel module initialized successfully\n" );
 
     return result;
 }
 
 static void __exit proton_exit( void ) 
 {
-    pr_info( "Proton kernel module shutting down...\n" );
+    pr_info( "proton kernel module shutting down...\n" );
 
     if ( !IS_ERR( sha256 ) )
     {
         crypto_free_shash( sha256 );
     }
 
-    pr_info( "Proton kernel module shut down successfully\n" );
+    pr_info( "proton kernel module shut down successfully\n" );
 }
 
 module_init( proton_init );
@@ -143,4 +143,4 @@ module_exit( proton_exit );
 MODULE_VERSION( "1.0.0" );
 MODULE_LICENSE( "GPL" ); 
 MODULE_AUTHOR( "Glenn Fiedler" ); 
-MODULE_DESCRIPTION( "Proton kernel module" );
+MODULE_DESCRIPTION( "Proton kernel module. Provides crypto functions that are callable from XDP programs." );

@@ -10,15 +10,14 @@ agent:
 blocks:
 
   - name: "Ubuntu 22.04"
-    agent:
-      machine:
-        type: f1-standard-4
-        os_image: ubuntu2204
     dependencies: []
     task:
+      agent:
+        machine:
+          type: f1-standard-4
+          os_image: ubuntu2204
       jobs:
-
-        - name: "Proton"
+        - name: "Build"
           commands:
             - checkout
             - uname -r
@@ -31,8 +30,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-
-        - name: "Proton"
+        - name: "Build"
           commands:
             - checkout
             - uname -r

@@ -14,17 +14,17 @@ sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt autoremove -y
 
 # install libxdp and libbpf from source
 
-pushd ~
 wget https://github.com/xdp-project/xdp-tools/releases/download/v1.5.5/xdp-tools-1.5.5.tar.gz
 tar -zxf xdp-tools-1.5.5.tar.gz
-cd xdp-tools-1.5.5
+pushd xdp-tools-1.5.5
 ./configure
 make -j && sudo make install
+popd
 
-cd lib/libbpf/src
+pushd xdp-tools/1.5.5/lib/libbpf/src
 make -j && sudo make install
 sudo ldconfig
-cd /
+popd
 
 # apt update and upgrade is sometimes necessary
 
@@ -45,15 +45,13 @@ sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/`uname -r`/build/
 
 # install proton module
 
-popd
 make
 sudo mkdir -p /lib/modules/`uname -r`/kernel/net/proton
 sudo mv proton.ko /lib/modules/`uname -r`/kernel/net/proton
 
 # setup proton module to load on reboot
 
-cd ~
-cp /etc/modules ~
+cp /etc/modules .
 echo "proton" >> modules.txt
 sudo mv modules.txt /etc/modules
 sudo depmod

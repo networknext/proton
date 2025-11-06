@@ -6,7 +6,7 @@ Proton is a linux kernel module based on [libhydrogen](https://github.com/jedisc
 
 # Why?
 
-
+Because I'm crazy and I write highly performant network components and backends in XDP, and I need access to crypto functions to make those work. Maybe you're crazy too?
 
 # Usage
 

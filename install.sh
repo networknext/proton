@@ -24,7 +24,7 @@ cd ..
 cd xdp-tools/1.5.5/lib/libbpf/src
 make -j && sudo make install
 sudo ldconfig
-cd ../../../../../
+cd ../../../../
 
 # IMPORTANT: if we are not running a 6.5 kernel, upgrade the kernel. we need ubuntu 22.04 LTS with linux kernel 6.5 for xdp relay to work
 

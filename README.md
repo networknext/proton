@@ -1,4 +1,4 @@
-https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202204/visualizing-the-proton-animation-art.jpg?itok=LhBl5_p3![Uploading image.png…]()
+<img width="1102" height="616" alt="image" src="https://github.com/user-attachments/assets/e6827e0e-ae18-4a73-af42-3253558e424c" />
 
 # proton
 

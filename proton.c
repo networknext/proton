@@ -79,7 +79,7 @@ int proton_secretbox_decrypt( void * data, int data__sz, __u64 message_id, void 
     void * message = data + PROTON_SECRETBOX_CRYPTO_HEADER_BYTES;
     int result = hydro_secretbox_encrypt( message, data, data__sz, message_id, secretbox_context, key );
     kernel_fpu_end();
-    return 0;
+    return result;
 }
 
 // ----------------------------------------------------------------------------------------------------------------------

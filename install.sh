@@ -14,7 +14,7 @@ sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt autoremove -y
 
 # install libxdp and libbpf from source
 
-cd ~
+pushd ~
 wget https://github.com/xdp-project/xdp-tools/releases/download/v1.5.5/xdp-tools-1.5.5.tar.gz
 tar -zxf xdp-tools-1.5.5.tar.gz
 cd xdp-tools-1.5.5
@@ -29,19 +29,6 @@ cd /
 # apt update and upgrade is sometimes necessary
 
 sudo apt update -y && sudo apt upgrade -y
-
-# IMPORTANT: if we are not running a 6.5 kernel, upgrade the kernel. we need ubuntu 22.04 LTS with linux kernel 6.5 *at minimum*
-
-major=$(uname -r | awk -F '.' '{print $1}')
-minor=$(uname -r | awk -F '.' '{print $2}')
-
-echo linux kernel version is $major.$minor
-
-if [[ $major -lt 6 ]]; then
-  echo "upgrading linux kernel to 6.5... please run setup again on this machine after it reboots"
-  sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt install linux-generic-hwe-22.04 -y
-  sudo reboot
-fi
 
 # if we need to reboot, it's best to do it now before we try to install linux headers because the kernel version may change
 
@@ -58,6 +45,7 @@ sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/`uname -r`/build/
 
 # install proton module
 
+popd
 make
 sudo mkdir -p /lib/modules/`uname -r`/kernel/net/proton
 sudo mv proton.ko /lib/modules/`uname -r`/kernel/net/proton

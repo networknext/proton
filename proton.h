@@ -22,6 +22,12 @@
 
 #include <linux/types.h>
 
+#ifdef __BPF__
+#define PROTON_FUNC __ksym
+#else // #ifdef __BPF__
+#define PROTON_FUNC 
+#endif // #ifdef __BPF__
+
 #define PROTON_SIGN_PUBLIC_KEY_BYTES              32
 #define PROTON_SIGN_PRIVATE_KEY_BYTES             64
 
@@ -38,12 +44,12 @@ struct proton_sign_verify_args
     __u8 public_key[PROTON_SIGN_PUBLIC_KEY_BYTES];
 };
 
-extern int proton_sha256( void * data, int data__sz, void * output, int output__sz );
+extern int proton_sha256( void * data, int data__sz, void * output, int output__sz ) PROTON_FUNC;
 
-extern int proton_sign_create( void * data, int data__sz, void * signature, int signature__sz, struct proton_sign_create_args * args );
+extern int proton_sign_create( void * data, int data__sz, void * signature, int signature__sz, struct proton_sign_create_args * args ) PROTON_FUNC;
 
-extern int proton_sign_verify( void * data, int data__sz, void * signature, int signature__sz, struct proton_sign_verify_args * args );
+extern int proton_sign_verify( void * data, int data__sz, void * signature, int signature__sz, struct proton_sign_verify_args * args ) PROTON_FUNC;
 
-extern int proton_secretbox_encrypt( void * data, int data__sz, __u64 message_id, void * key, int key__sz );
+extern int proton_secretbox_encrypt( void * data, int data__sz, __u64 message_id, void * key, int key__sz ) PROTON_FUNC;
 
-extern int proton_secretbox_decrypt( void * data, int data__sz, __u64 message_id, void * key, int key__sz );
+extern int proton_secretbox_decrypt( void * data, int data__sz, __u64 message_id, void * key, int key__sz ) PROTON_FUNC;

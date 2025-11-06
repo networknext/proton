@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # clean out any old journalctl logs so we have space to do stuff
 
@@ -25,6 +25,19 @@ pushd xdp-tools/1.5.5/lib/libbpf/src
 make -j && sudo make install
 sudo ldconfig
 popd
+
+# IMPORTANT: if we are not running a 6.5 kernel, upgrade the kernel. we need ubuntu 22.04 LTS with linux kernel 6.5 for xdp relay to work
+
+major=$(uname -r | awk -F '.' '{print $1}')
+minor=$(uname -r | awk -F '.' '{print $2}')
+
+echo linux kernel version is $major.$minor
+
+if [[ $major -lt 6 ]]; then
+  echo "upgrading linux kernel to 6.5... please run setup again on this relay after it reboots"
+  sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt install linux-generic-hwe-22.04 -y
+  sudo reboot
+fi
 
 # apt update and upgrade is sometimes necessary
 

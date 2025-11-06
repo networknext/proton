@@ -1,0 +1,24 @@
+version: v1.0
+
+name: Build
+
+agent:
+  machine:
+    type: f1-standard-4
+    os_image: ubuntu2404
+
+blocks:
+
+  - name: "Build"
+    dependencies: []
+    task:
+      jobs:
+
+        - name: "Proton"
+          commands:
+            - checkout
+            - uname -r
+            - sudo DEBIAN_FRONTEND=noninteractive apt update -y
+            - sudo DEBIAN_FRONTEND=noninteractive apt install -y build-essential libsodium-dev libcurl4-openssl-dev clang linux-headers-generic linux-headers-`uname -r` linux-tools-`uname -r` libc6-dev-i386 gcc-12 dwarves libelf-dev pkg-config m4 libpcap-dev net-tools
+            - sudo cp /sys/kernel/btf/vmlinux /usr/lib/modules/`uname -r`/build/
+            - make

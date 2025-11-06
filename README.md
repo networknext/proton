@@ -46,6 +46,10 @@ extern int proton_secretbox_decrypt( void * data, int data__sz, __u64 message_id
 
 These functions are compatible with crypto done in userspace using the regular libhydrogen, but please take special care with secretbox because I had to change the function signature.
 
-The reason for this is thaht there is a limit of 5 arguments per-kfunc *and* you need to pass in array lengths via *__sz for the BPF verifier. 
+The reason is that there is a limit of 5 arguments per-kfunc *and* you need to pass in array lengths via *__sz for the BPF verifier.
 
-Because of this, the secretbox functions encrypt and decrypt *in-place* and you need to pass in a pointer to the data with the crypto header included at the front for both encrypt and decrypt.
+Because of this, the secretbox functions encrypt and decrypt in-place *and* you need to pass in a pointer to the data with the crypto header included at the front for both encrypt and decrypt.
+
+# Example
+
+If you'd like to see an example of proton in action take a look at the new Network Next backend I'm writing in XDP: https://github.com/networknext/protect

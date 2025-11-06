@@ -52,4 +52,4 @@ Because of this, the secretbox functions encrypt and decrypt in-place *and* you 
 
 # Example
 
-If you'd like to see an example of proton in action take a look at the new UDP-based network next backend I'm writing in XDP: https://github.com/networknext/protect
+If you'd like to see an example of proton in action take a look at the new Network Next backend I'm writing in XDP: https://github.com/networknext/protect

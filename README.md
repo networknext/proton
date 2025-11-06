@@ -12,9 +12,9 @@ Because I'm crazy and I write highly performant network components and backends 
 
 # Usage
 
-Just run `./setup.sh` to build and install the kernel module, and set it to load on boot.
+Run `./setup.sh` to build and install the kernel module and set it to load on boot.
 
-Now you can just include proton.h in your XDP programs and call crypto functions:
+Now you can include proton.h in your XDP program and call crypto functions:
 
 ```
 #define PROTON_SIGN_PUBLIC_KEY_BYTES              32
@@ -44,4 +44,4 @@ extern int proton_secretbox_encrypt( void * data, int data__sz, __u64 message_id
 extern int proton_secretbox_decrypt( void * data, int data__sz, __u64 message_id, void * key, int key__sz );
 ```
 
-Please take special care with secretbox because I had to change the way it works (you must pass in pointer to a struct including the crypto header in front, and it will encrypt/decryt in place. This is necessary because there is a limit of 5 arguments per-kfunc and I need to pass in array lengths via *__sz for the BPF verifier.
+These functions are compatible with crypto done in userspace using the regular libhydrogen, but please take special care with secretbox because I had to change the function signature because there is a limit of 5 arguments per-kfunc and you need to pass in array lengths via *__sz for the BPF verifier. This function encrypts and decrypts in place and you need to pass in a pointer to the data with the crypto header included at the front for both encrypt and decrypt.

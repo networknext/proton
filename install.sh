@@ -16,15 +16,15 @@ sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_SUSPEND=1 apt autoremove -y
 
 wget https://github.com/xdp-project/xdp-tools/releases/download/v1.5.5/xdp-tools-1.5.5.tar.gz
 tar -zxf xdp-tools-1.5.5.tar.gz
-pushd xdp-tools-1.5.5
+cd xdp-tools-1.5.5
 ./configure
 make -j && sudo make install
-popd
+cd ..
 
-pushd xdp-tools/1.5.5/lib/libbpf/src
+cd xdp-tools/1.5.5/lib/libbpf/src
 make -j && sudo make install
 sudo ldconfig
-popd
+cd ../../../../../
 
 # IMPORTANT: if we are not running a 6.5 kernel, upgrade the kernel. we need ubuntu 22.04 LTS with linux kernel 6.5 for xdp relay to work
 

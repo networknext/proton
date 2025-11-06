@@ -68,8 +68,8 @@ static __u8 secretbox_context[hydro_secretbox_CONTEXTBYTES];
 int proton_secretbox_encrypt( void * data, int data__sz, __u64 message_id, void * key, int key__sz )
 {
     kernel_fpu_begin();
-    void * message = data + NEXT_SECRETBOX_CRYPTO_HEADER_BYTES;
-    int message_bytes = data__sz - NEXT_SECRETBOX_CRYPTO_HEADER_BYTES;
+    void * message = data + CRYPTO_SECRETBOX_CRYPTO_HEADER_BYTES;
+    int message_bytes = data__sz - CRYPTO_SECRETBOX_CRYPTO_HEADER_BYTES;
     int result = hydro_secretbox_encrypt( data, message, message_bytes, message_id, secretbox_context, key );
     kernel_fpu_end();
     return result;

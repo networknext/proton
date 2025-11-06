@@ -1,6 +1,6 @@
 [![Build Status](https://networknext.semaphoreci.com/badges/proton/branches/master.svg?style=shields&key=1e07ad28-fbe5-42cb-8fe0-60b5286b7949)](https://networknext.semaphoreci.com/projects/proton)
 
-<img width="1102" height="616" alt="image" src="https://github.com/user-attachments/assets/e6827e0e-ae18-4a73-af42-3253558e424c" />
+<img width="2204" height="1232" alt="image" src="https://github.com/user-attachments/assets/8b904825-212f-480c-a84c-dc7831ac8c6a" />
 
 # proton
 

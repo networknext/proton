@@ -17,7 +17,7 @@
 
     ISC License:
 
-        Copyright 2017 - 2025 Network Next, Inc.
+        Copyright (c) 2025 Network Next, Inc.
 
         Written by Glenn Fiedler <glenn@networknext.com>
 
